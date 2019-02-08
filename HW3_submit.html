@@ -13317,14 +13317,21 @@ IDF
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">distance</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">q_transform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5849625007211562</span>
+<span class="n">q_transform</span>
+
 <span class="n">weights</span><span class="o">=</span><span class="p">[]</span>
 <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">doc_TF</span><span class="p">:</span>
-<span class="c1">#     print(0.5849625007211562**np.array(doc_TF[doc]))</span>
-    <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">doc</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="nb">sum</span><span class="p">(</span><span class="mf">0.5849625007211562</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">doc_TF</span><span class="p">[</span><span class="n">doc</span><span class="p">]))])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="mf">0.5849625007211562</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">doc_TF</span><span class="p">[</span><span class="n">doc</span><span class="p">]))</span>
+    <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">doc</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="mf">0.5849625007211562</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">doc_TF</span><span class="p">[</span><span class="n">doc</span><span class="p">]),</span><span class="n">q_transform</span><span class="p">)])</span>
+<span class="c1">#     weights.append(0.5849625007211562**np.array(doc_TF[doc]))</span>
+<span class="c1">#     print(distance.cosine())</span>
+<span class="c1">#     weights.append([doc+1,sum(0.5849625007211562**np.array(doc_TF[doc]))])</span>
 <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;doc&#39;</span><span class="p">,</span><span class="s1">&#39;score&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;score&#39;</span><span class="p">)</span>
 </pre></div>
@@ -13339,7 +13346,20 @@ IDF
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[40]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0.94000499 0.95959234 0.97958784]
+[1.         1.         0.94779148]
+[0.96704237 0.96704237 1.        ]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[65]:</div>
 
 
 
@@ -13368,19 +13388,19 @@ IDF
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2.879185</td>
-    </tr>
-    <tr>
       <th>2</th>
       <td>3</td>
-      <td>2.934085</td>
+      <td>0.000126</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.000142</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>2.947791</td>
+      <td>0.000314</td>
     </tr>
   </tbody>
 </table>
