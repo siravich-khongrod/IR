@@ -1,0 +1,21 @@
+    j=0
+    for q_token in q[1].keys():
+#         print(q_token)
+        for newdummydocid in set(doc_w_terms).difference(set([key for docs in docs_tfidf[q_token] for key in docs.keys()])):
+            docs_tfidf[q_token].append({newdummydocid:0})
+#             docs_tfidf.setdefault(q_token,[]).append({newdummydocid:0})
+        docs_tfidf[q_token]=(sorted(docs_tfidf[q_token], key=lambda d: [k in d for k in doc_w_terms], reverse=True))
+        print()
+
+        # CALCULATE DISTANCE
+#         print([v for d in docs_tfidf[q_token] for k,v in d.items()])
+        query_docs[j]=([v for d in docs_tfidf[q_token] for k,v in d.items()])
+        j+=1
+    print(query_docs.shape)
+    scores=[]
+    for terms_vec in query_docs.T:
+#         print(distance.cosine(terms_vec,q_tfidf))
+        scores.append(distance.cosine(terms_vec,q_tfidf))
+    scores=(np.array([doc_w_terms,scores]))
+    
+    print(np.sort(scores))
