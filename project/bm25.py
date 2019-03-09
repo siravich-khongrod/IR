@@ -1,4 +1,7 @@
 from math import log
+from collections import defaultdict
+import json
+import operator
 
 '''
 IR Book: 11.4.3
@@ -36,10 +39,10 @@ def get_avdl(length_index):
     return float(corpus_length) / float(len(length_index))
 
 def search(query):
-    inv_index_file = open("../data/indexes/inverted_index.json","r")
+    inv_index_file = open("./data/indexes/inverted_index.json","r")
     inverted_index = json.load(inv_index_file)
 
-    length_index_file = open("../data/indexes/length_index.json","r")
+    length_index_file = open("./data/indexes/length_index.json","r")
     length_index = json.load(length_index_file)
 
     scores = defaultdict(list)
@@ -54,6 +57,4 @@ def search(query):
 	
 def matching(keyword):
     results = search(keyword)
-    
-    for result in results:
-        print(result)
+    return results

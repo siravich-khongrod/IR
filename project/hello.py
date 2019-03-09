@@ -1,10 +1,21 @@
 import os
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 import nltk
 from nltk.tokenize import word_tokenize, wordpunct_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 
+
+import tokenizer
+import indexer
+import bm25
+
+import imp
+indexer.generate_index()
+
+
 app = Flask(__name__)
+
+
 
 @app.route('/')
 def hello():
@@ -31,4 +42,18 @@ def get_tasks():
 		return jsonify({'docs': docs_token[id]})
 		
 	return jsonify({'docs': docs_token})
-	
+
+@app.route('/search', methods=['GET'])
+def search():
+	if 'q' in request.args:
+		q = request.args['q']
+		results = bm25.matching(q)
+		return jsonify({'docs': results})
+	else:
+		return 'error'#jsonify({'docs': bm25.matching('i love python and sql')})
+		
+
+# parse json and create button to download file as hard coded below
+@app.route('/get_file', methods=['GET'])
+def get_file():
+	return send_file('data/documents/113183139imran_B.tech_IT.pdf',as_attachment=True)
