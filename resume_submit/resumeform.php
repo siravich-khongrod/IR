@@ -4,6 +4,7 @@
 <link rel='stylesheet' href='grid.css' type='text/css' media='all' />
 <link rel='stylesheet' href='custom.css' type='text/css' media='all' />
 
+<?php $target_file_name = md5(uniqid(rand(), true)); ?>
   	<script language="javascript" type="text/javascript">
 	//<--
 	function startUpload(){
@@ -106,9 +107,9 @@
 							<!--div class="file"><span>No file chosen</span>
 								<div>Browse</div>
                                                                 
-								<input type="file" name="applicant_resume" id="applicant_resume" value="736dd0cfc9e1a650040b17fdc417c71e" class="sjb-attachment form-control " required="required" size="50" style="opacity: 0;">
+								<input type="file" name="applicant_resume" id="applicant_resume" value="<?php echo $target_file_name; ?>" class="sjb-attachment form-control " required="required" size="50" style="opacity: 0;">
 							</div><span class="sjb-invalid-attachment validity-note" id="file-error-message"></span></div-->
-                                                        <!--div> <input id="applicant_resume" name="applicant_resume" type="text" value="736dd0cfc9e1a650040b17fdc417c71e" > </div-->
+                                                        <!--div> <input id="applicant_resume" name="applicant_resume" type="text" value="<?php echo $target_file_name; ?>" > </div-->
 						
 						<div class="form-group">
 							<label for="applicant_resume">Would you like to submit resume to recruitement firm?</label>
@@ -117,11 +118,11 @@
 							<input type="radio" name="recruit" value="0"> No<br>
 						</div>
 						
-						<div> <input type="hidden" id="vhphoto" name="vhphoto" type="text" value="736dd0cfc9e1a650040b17fdc417c71e" > </div>
+						<div> <input type="hidden" id="vhphoto" name="vhphoto" type="text" value="<?php echo $target_file_name; ?>" > </div>
 						<div id="">
 							<label>Select File</label><br/>
 							<input type="file" name="file" id="file" class="sjb-attachment form-control valid" required />
-							<input type="hidden" id="filename" name="filename" type="text" value="736dd0cfc9e1a650040b17fdc417c71e">
+							<input type="hidden" id="filename" name="filename" type="text" value="<?php echo $target_file_name; ?>">
 							<!--input type="submit" value="Upload" class="submit" /-->
 						</div>
 						
